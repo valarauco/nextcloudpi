@@ -35,6 +35,13 @@ is_active()
 
 install()
 {
+  # temporary workaround for bug https://github.com/certbot/certbot/issues/5138#issuecomment-333391771
+  cat > /etc/pip.conf <<EOF
+[global]
+extra-index-url=https://www.piwheels.hostedpi.com/simple
+extra-index-url=https://www.piwheels.hostedpi.com/simple/zope.components
+EOF
+
   cd /etc || return 1
   git clone https://github.com/letsencrypt/letsencrypt
   /etc/letsencrypt/letsencrypt-auto --help # do not actually run certbot, only install packages
@@ -50,6 +57,9 @@ exit 0
 EOF
     chmod +x /etc/cont-init.d/100-letsencrypt-run.sh
   }
+
+  # temporary workaround for bug https://github.com/certbot/certbot/issues/5138#issuecomment-333391771
+  cat >> /etc/pip.conf <<<"extra-index-url=https://www.piwheels.hostedpi.com/simple/zope.components"
 }
 
 # tested with git version v0.11.0-71-g018a304
