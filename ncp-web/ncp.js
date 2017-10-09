@@ -168,10 +168,21 @@ $(function()
       }).error( errorMsg );
   } );
 
+  // Wizard button
+  $( '#wizard' ).on('click', function(e)
+  {
+    window.location = 'wizard';
+  } );
   // close notification icon
   $( '.icon-close' ).on('click', function(e)
   {
     $( '#notification' ).hide();
+  } );
+
+  // close first run box
+  $( '.first-run-close' ).on('click', function(e)
+  {
+    $( '#first-run-wizard' ).hide();
   } );
 });
 
